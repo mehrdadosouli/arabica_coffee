@@ -66,7 +66,7 @@ export default function ContactUs() {
     <div className="size-full">
       <img src={img1} alt="" className='w-full h-screen object-cover' />
       <h1 className='w-fit text-5xl font-bold absolute top-1/3 left-0 right-0 mx-auto animate-bounce'>تماس با قهوه عربیکا</h1>
-      {/* <iframe data-aos="zoom-in-up" className='lg:w-[1260px] w-screen h-[400px] mx-auto' src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d25922.90947792249!2d51.320461173189166!3d35.692666990752535!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8dfe05732c2e91%3A0xfcbec017befd15f4!2sAzadi%20Tower!5e0!3m2!1sen!2s!4v1716377163043!5m2!1sen!2s" ></iframe> */}
+      <iframe data-aos="zoom-in-up" className='lg:w-[1260px] w-screen h-[400px] mx-auto' src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d25922.90947792249!2d51.320461173189166!3d35.692666990752535!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8dfe05732c2e91%3A0xfcbec017befd15f4!2sAzadi%20Tower!5e0!3m2!1sen!2s!4v1716377163043!5m2!1sen!2s" ></iframe>
       <div className='lg:w-[1260px] w-full mx-auto grid md:grid-cols-2 grid-cols-1 gap-10 p-10 '>
         <div className='flex flex-row gap-10 p-5 dark:text-white border border-solid border-gray-200 shadow-xl rounded-3xl'>
           <div>
