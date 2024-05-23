@@ -15,14 +15,17 @@ import Footer from "./components/footer/Footer";
 import NotFound from "./components/notFound/NotFound";
 import Product from "./components/product/Product";
 import CartPage from "./pages/CartPage";
+// toast alert 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   AOS.init();
-
   return (
     <>
       <Header />
-
+      {/* toast  show*/}
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/shopping" element={<Shopping />} />
