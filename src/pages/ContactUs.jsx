@@ -22,14 +22,11 @@ export default function ContactUs() {
   const blurHandler = (e) => {
     if (!e.target.value) {
       const newError = { ...err };
-      for (const item in data) {
-        if (!data[item]) {
-          newError[item] = `لطفا ${item} را وارد کنید`
-        }
-        
+      if (!data[e.target.name]) {
+        newError[e.target.name] = `لطفا ${e.target.name} را وارد کنید`
       }
-      notify(`لطفا فیلد ${e.target.name} را پر کنید`)
       setErr(newError)
+      notify(`لطفا فیلد ${e.target.name} را پر کنید`)
     } else {
       const newError = { ...err };
       delete newError[e.target.name];
