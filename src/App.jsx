@@ -18,6 +18,8 @@ import CartPage from "./pages/CartPage";
 // toast alert 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Blogs from "./pages/Blogs";
+import Blog from "./pages/Blog";
 
 function App() {
   AOS.init();
@@ -33,6 +35,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/blog" element={<Blogs />} />
+        <Route path="/blog/:id" element={<Blog />} />
         <Route path="/contact-us" element={<ContactUs />} />
 
         {/* see single product */}

@@ -5,7 +5,7 @@ const ItemBlog = ({ blog }) => {
   return (
     <Link
       to={`/blog/${blog.uuid}`}
-      className="w-full h-[150px] lg:h-auto p-2.5 relative bg-bgItemLightColor dark:bg-bgItemDarkColor flex flex-row lg:flex-col justify-between items-center gap-5 rounded-2xl shadow-defaultShadow overflow-hidden"
+      className="w-full min-h-[200px] lg:h-auto p-2.5 relative bg-bgItemLightColor dark:bg-bgItemDarkColor flex flex-row lg:flex-col justify-between items-center gap-5 rounded-2xl shadow-defaultShadow overflow-hidden"
     >
       <img
         src={blog.image}
@@ -39,7 +39,7 @@ const ItemBlog = ({ blog }) => {
             <span className="leading-none">{blog.date.split("/")[0]}</span>
           </h5>
           <Link
-            to={`#`}
+            to={`/blog/${blog.uuid}`}
             className="lg:hidden px-3 py-1 text-xs font-[Dana] font-normal text-primaryColor dark:text-secondaryColor bg-secondaryColor/20 dark:bg-primaryColor/20 rounded-md flex flex-row justify-center items-center gap-1 select-none"
           >
             مطالعه
