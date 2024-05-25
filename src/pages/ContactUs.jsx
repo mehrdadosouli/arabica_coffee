@@ -1,8 +1,7 @@
-import React, { useEffect, useState , lazy } from 'react';
+import React, { useEffect, useState, lazy } from 'react';
 import img1 from '../../src/assets/image/contact-us.jpg';
 import Swal from 'sweetalert2'
 import { toast } from 'react-toastify';
-import Loading from '../components/loading/Loading';
 
 
 export default function ContactUs() {
@@ -14,7 +13,8 @@ export default function ContactUs() {
     subject: ""
   });
   const [err, setErr] = useState({})
-  const [loadImg,setLoadImg]=useState(true)
+  const [loadImg, setLoadImg] = useState(true)
+  const [loadMap, setLoadMap] = useState(true)
 
   const formChangeHandler = (e) => {
     const newData = { ...data };
@@ -38,38 +38,39 @@ export default function ContactUs() {
   const submitHandler = (e) => {
     e.preventDefault()
 
-      setErr({})
-      const newErr = {};
-      for (const item in data) {
-        
-        if (!data[item]) {
-          newErr[item] = `لطفا ${item} را وارد کنید`
-          notify(`لطفا فیلد ${[item]} را پر کنید`)
-        }
-      }
-      setErr(newErr)
+    setErr({})
+    const newErr = {};
+    for (const item in data) {
 
-      if(data.name && data.subject && data.email && data.texts){
-        Swal.fire({
-          title:'',
-          text:'نظر شما با موفقیت ارسال شد',
-          icon:'success'
-        })
+      if (!data[item]) {
+        newErr[item] = `لطفا ${item} را وارد کنید`
+        notify(`لطفا فیلد ${[item]} را پر کنید`)
       }
-    
     }
-    const onLoadHandler=()=>{
-      setLoadImg(false)
+    setErr(newErr)
+
+    if (data.name && data.subject && data.email && data.texts) {
+      Swal.fire({
+        title: '',
+        text: 'نظر شما با موفقیت ارسال شد',
+        icon: 'success'
+      })
     }
+
+  }
+  const onLoadHandler = () => {
+    setLoadImg(false)
+  }
   useEffect(() => {
     document.title = "کافه عربیکا - ارتباط با ما";
   }, []);
   return (
-    <div className="size-full">
-      {loadImg && <Loading />}
-       <img src={img1} alt="" className='w-full h-screen object-cover' loading="lazy" onLoad={onLoadHandler} />
+    <div className="size-full relative">
+      {loadImg && <svg className='z-50 absolute top-1/4 left-1/2' width="100" height="100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" /><path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"><animateTransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" /></path></svg>}
+      {img1 ? <img src={img1} alt="" className='w-full h-screen object-cover' loading="lazy" onLoad={onLoadHandler} /> : <div className='w-full h-screen bg-gray-800'></div>}
       <h1 className='w-fit text-5xl font-bold absolute top-1/3 left-0 right-0 mx-auto animate-bounce'>تماس با قهوه عربیکا</h1>
-      <iframe data-aos="zoom-in-up" className='lg:w-[1260px] w-screen h-[400px] mx-auto' src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d25922.90947792249!2d51.320461173189166!3d35.692666990752535!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8dfe05732c2e91%3A0xfcbec017befd15f4!2sAzadi%20Tower!5e0!3m2!1sen!2s!4v1716377163043!5m2!1sen!2s" ></iframe>
+      {loadMap && <svg className='z-50 mx-auto' width="100" height="100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" /><path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"><animateTransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" /></path></svg>}
+      <iframe data-aos="zoom-in-up" onLoad={() => setLoadMap(false)} className='lg:max-w-[1260px] w-screen h-[400px] mx-auto' src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d25922.90947792249!2d51.320461173189166!3d35.692666990752535!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8dfe05732c2e91%3A0xfcbec017befd15f4!2sAzadi%20Tower!5e0!3m2!1sen!2s!4v1716377163043!5m2!1sen!2s" ></iframe>
       <div className='lg:w-[1260px] w-full mx-auto grid md:grid-cols-2 grid-cols-1 gap-10 p-10 '>
         <div className='flex flex-row gap-10 p-5 dark:text-white border border-solid border-gray-200 shadow-xl rounded-3xl'>
           <div>
