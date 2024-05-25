@@ -1,20 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import img1 from '../../src/assets/image/blogs/blog-1.png'
 import img2 from '../../src/assets/image/blogs/blog-2.png'
 import img3 from "../../src/assets/image/abouteus.jpg"
+import Loading from '../components/loading/Loading';
 const AboutUs = () => {
   const infoUsers=[
     {img1,desc1:'امیدواریم تجربه خوشایندی را برای شما ایجاد کنیم. با تشکر از حمایت شما و انتخاب ما امیدواریم تجربه خوشایندی را برای شما ایجاد کنیم. با تشکر از حمایت شما و انتخاب ما امیدواریم تجربه خوشایندی را برای شما ایجاد کنیم. با تشکر از حمایت شما و انتخاب ماامیدواریم تجربه خوشایندی را برای شما ایجاد کنیم. با تشکر از حمایت شما و انتخاب ما'},
     {img2,desc2:'امیدواریم تجربه خوشایندی را برای شما ایجاد کنیم. با تشکر از حمایت شما و انتخاب ما امیدواریم تجربه خوشایندی را برای شما ایجاد کنیم. با تشکر از حمایت شما و انتخاب ما امیدواریم تجربه خوشایندی را برای شما ایجاد کنیم. با تشکر از حمایت شما و انتخاب ماامیدواریم تجربه خوشایندی را برای شما ایجاد کنیم. با تشکر از حمایت شما و انتخاب ما'},
   ]
+  const [loadImg,setLoadImg]=useState(true)
+
   useEffect(() => {
     document.title = "کافه عربیکا - درباره ما ";
   }, []);
-
+  const onLoadHandler=()=>{
+    setLoadImg(false)
+  }
   return (
     <div className="w-full bg-bgLightColor dark:bg-bgDarkColor">
       <div className="w-full h-screen flex flex-col justify-center items-center md:items-end text-center md:text-justify ">
-        <img src={img3} alt="" className='size-full relative object-cover' />
+      {loadImg && <Loading /> }
+        <img src={img3} alt="" className='size-full relative object-cover' loading="lazy" onLoad={onLoadHandler} />
         <div className="w-full md:w-1/2 h-82 p-6 m-5 text-white absolute bg-transparent backdrop-blur md:backdrop-blur-0">
           <p className=''>خوش آمدید به سایت قهوه فروشی ما! ما با افتخار به ارائه بهترین و با کیفیت ترین قهوه ها مشغولیم. امیدواریم تجربه خوشایندی را برای شما ایجاد کنیم. با تشکر از حمایت شما و انتخاب ما.</p>
           <p className='hidden md:flex'>تمامی قهوه های ما از بهترین دانه های قهوه انتخاب شده و با دقت و آرامش برای شما تهیه می شوند. ما به ارائه تجربه ای منحصر به فرد و لذت بخش از مصرف قهوه برای مشتریانمان اهمیت ویژه ای می دهیم.</p>
