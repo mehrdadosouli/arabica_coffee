@@ -169,7 +169,7 @@ export default function Shopping() {
   }, []);
 
   return (
-    <section className="w-full lg:max-w-[1260px] relative lg:pt-32 pb-20 px-4 lg:px-0 flex flex-col gap-10 lg:gap-20">
+    <section className="w-full lg:max-w-[1260px] relative lg:pt-32 py-20 px-4 lg:px-0 flex flex-col gap-10 lg:gap-20">
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-5 justify-center items-center">
           {products.map((item, index) => (
             <ItemProduct key={index} product={item} />

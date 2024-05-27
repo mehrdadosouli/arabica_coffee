@@ -37,26 +37,23 @@ export default function ContactUs() {
   }
   const submitHandler = (e) => {
     e.preventDefault()
-
-    setErr({})
-    const newErr = {};
-    for (const item in data) {
-
-      if (!data[item]) {
-        newErr[item] = `لطفا ${item} را وارد کنید`
-        notify(`لطفا فیلد ${[item]} را پر کنید`)
-      }
-    }
-    setErr(newErr)
-
-    if (data.name && data.subject && data.email && data.texts) {
+    if (!Object.keys(err).length) {
       Swal.fire({
         title: '',
         text: 'نظر شما با موفقیت ارسال شد',
         icon: 'success'
       })
+    }else{
+      setErr({})
+      const newErr = {};
+      for (const item in data) {
+        if (!data[item]) {
+          newErr[item] = `لطفا ${item} را وارد کنید`
+          notify(`لطفا فیلد ${[item]} را پر کنید`)
+        }
+      }
+      setErr(newErr)
     }
-
   }
   const onLoadHandler = () => {
     setLoadImg(false)
