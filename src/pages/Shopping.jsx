@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ItemProduct from "../components/product/item-product/ItemProduct";
 //image product
 import p1 from "../assets/image/products/p1.png";
@@ -11,7 +11,7 @@ import p5 from "../assets/image/products/p5.png";
 import p6 from "../assets/image/products/p6.png";
 import p7 from "../assets/image/products/p7.png";
 import p8 from "../assets/image/products/p8.png";
-import { Link } from "react-router-dom";
+import TitleSectionProducts from "../components/title-section/TitleSectionProducts";
 
 export default function Shopping() {
   const products = [
@@ -163,33 +163,35 @@ export default function Shopping() {
       offer_amount: 0,
     },
   ];
-
+  const [select, setSelect] = useState("default");
+  console.log(select);
   useEffect(() => {
     document.title = "کافه عربیکا - فروشگاه";
   }, []);
 
-  return (
-    <section className="w-full lg:max-w-[1260px] relative lg:pt-32 pb-20 px-4 lg:px-0 flex flex-col gap-10 lg:gap-20">
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-5 justify-center items-center">
-          {products.map((item, index) => (
-            <ItemProduct key={index} product={item} />
-          ))}
-        </section>
-        <section className="grid grid-cols-2 lg:grid-cols-4 gap-5 justify-center items-center">
-            {products2?.length !== 0 &&
-              products2?.map((item) => (
-                <Link key={item.uuid} to={`#`}>
-                  <section>
-                    <ItemProduct product={item} />
-                  </section>
-                </Link>
-              ))}
+  const changeFilter = (e) => {
+    setSelect(e.target.value);
+  };
+  const fiteringProduct = (product, itemFilter) => {
+    switch (itemFilter) {
+      case "default":
+        return product.map((elem,index)=><ItemProduct key={index} product={elem} />);
+        case "expensive" :
+          return product.sort((a,b)=>(b.offer_amount ? b.offer_amount : b.amount) - (a.offer_amount ? a.offer_amount : a.amount)).map((elem,index)=><ItemProduct key={index} product={elem} />);
+        case "free" :
+          return product.sort((a,b)=>(a.offer_amount ? a.offer_amount : a.amount) - (b.offer_amount ? b.offer_amount : b.amount)).map((elem,index)=><ItemProduct key={index} product={elem} />);
+      default:product
+        break;
+    }
+  };
 
-            {!products2?.length === 0 && (
-              <h2 className="w-full text-slate-800 text-base text-center font-bold capitalize">
-                products is not found!
-              </h2>
-            )}
-        </section>
-  </section>
-  )}
+
+  return (
+    <section className="w-full lg:max-w-[1260px] relative lg:pt-32 py-20 px-4  flex flex-col gap-10">
+      <TitleSectionProducts changeFilter={changeFilter} />
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-5 justify-center items-center">
+        {fiteringProduct([...products, ...products2], select)}
+      </section>
+    </section>
+  );
+}
