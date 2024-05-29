@@ -182,7 +182,7 @@ export default function Header() {
     <header className="w-full lg:w-11/12 h-16 lg:h-24 fixed lg:fixed top-0 z-50 px-4 lg:px-8 lg:mt-9 bg-bgItemLightColor dark:bg-bgItemDarkColor lg:bg-[#00000080] dark:lg:bg-[#00000080] lg:backdrop-blur-sm flex flex-row justify-between items-center lg:rounded-3xl">
       <div
         onClick={() => hamburgerMenuBtn()}
-        className="lg:hidden text-textPrimaryLightColor dark:text-textPrimaryDarkColor hover:text-primaryColor dark:hover:text-secondaryColor duration-300"
+        className="lg:hidden text-textPrimaryLightColor dark:text-textPrimaryDarkColor hover:text-primaryColor dark:hover:text-secondaryColor duration-300 cursor-pointer"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -209,7 +209,7 @@ export default function Header() {
       {/* cart icon */}
       <span
         onClick={() => hamburgerCartBtn()}
-        className="lg:hidden text-textPrimaryLightColor dark:text-textPrimaryDarkColor hover:text-primaryColor dark:hover:text-secondaryColor duration-300"
+        className="lg:hidden text-textPrimaryLightColor dark:text-textPrimaryDarkColor hover:text-primaryColor dark:hover:text-secondaryColor duration-300 cursor-pointer"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -273,7 +273,7 @@ export default function Header() {
             <hr className="w-full lg:hidden h-px bg-lineSecondaryColor dark:bg-white-10" />
 
             {/* menu */}
-            <ul className="w-full lg:w-auto text-base lg:text-xl font-normal text-textPrimaryDarkColor flex flex-col lg:flex-row justify-start items-start lg:items-center gap-2.5 lg:gap-9 duration-300 *:duration-300">
+            <ul className="w-full lg:w-auto text-base lg:text-xl font-normal dark:text-textPrimaryDarkColor md:text-textPrimaryDarkColor flex flex-col lg:flex-row justify-start items-start lg:items-center gap-2.5 lg:gap-9 duration-300 *:duration-300">
               {itemMenu.map((item) => (
                 <Link
                   key={item.page}
@@ -336,21 +336,6 @@ export default function Header() {
                   />
                 </svg>
                 <span className="lg:hidden">سبد خرید</span>
-
-                <div className="lg:pt-4 lg:absolute left-0">
-                  <ul
-                    className={
-                      showCartMobile
-                        ? "w-full lg:w-80 group-hover:min-w-80 h-0 group-hover:h-auto lg:p-0 bg-bgItemLightColor dark:bg-bgItemDarkColor lg:group-hover:border-t-4 lg:border-primaryColor lg:rounded-2xl group-hover:p-2.5 lg:group-hover:py-5 group-hover:px-6 group-hover:flex flex-col justify-center items-start gap-4 duration-300 overflow-hidden"
-                        : "w-full lg:w-0 h-0 lg:p-0"
-                    }
-                  >
-                    <Cart
-                      showCartMobile={showCartMobile}
-                      hamburgerCartBtn={hamburgerCartBtn}
-                    />
-                  </ul>
-                </div>
               </div>
 
               {theme == "light" ? (
@@ -427,12 +412,29 @@ export default function Header() {
           className="lg:hidden w-full h-screen absolute top-0 left-0 -z-10 bg-[#00000040]"
         ></span>
       </div>
+      
+      <div className="lg:pt-4 lg:absolute left-0">
+        <ul
+          className={
+            showCartMobile
+              ? "w-full lg:w-80 group-hover:min-w-80 h-0 group-hover:h-auto lg:p-0 bg-bgItemLightColor dark:bg-bgItemDarkColor lg:group-hover:border-t-4 lg:border-primaryColor lg:rounded-2xl group-hover:p-2.5 lg:group-hover:py-5 group-hover:px-6 group-hover:flex flex-col justify-center items-start gap-4 duration-300 overflow-hidden"
+              : "w-full lg:w-0 h-0 lg:p-0"
+          }
+        >
+          <Cart
+            showCartMobile={showCartMobile}
+            hamburgerCartBtn={hamburgerCartBtn}
+          />
+        </ul>
+      </div>
 
-      {window.innerWidth <= 430 && (
-        <Cart
-          showCartMobile={showCartMobile}
-          hamburgerCartBtn={hamburgerCartBtn}
-        />
+      {window.innerWidth > 430 && (
+        <div className="lg:pt-4 lg:absolute lg:left-0 lg:top-[90%] ">
+          <Cart
+            showCartMobile={showCartMobile}
+            hamburgerCartBtn={hamburgerCartBtn}
+          />
+      </div>
       )}
     </header>
   );
