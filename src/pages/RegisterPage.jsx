@@ -1,9 +1,11 @@
+import { useState } from 'react';
+import img1 from '../assets/image/register.jpg'
+import { useNavigate } from "react-router-dom";
 import { useFormik } from 'formik';
 import Swal from 'sweetalert2'
-import { useNavigate } from "react-router-dom";
-import img1 from '../assets/image/register.jpg'
 
 export default function RegisterPage() {
+  const [form,setForm]=useState('ثبت نام')
   const navigate=useNavigate()
   const rgx = /^[\w-\.]+@(?:[a-zA-Z]+\.)+com{1,4}$/i;
   const formik = useFormik({
@@ -40,11 +42,15 @@ export default function RegisterPage() {
       }
     }
   });
+
   return (
     <div className='w-full min-h-[40rem] relative'>
       <img src={img1} alt="register" className='w-full h-screen object-cover' />
-      <form onSubmit={formik.handleSubmit} className='md:w-1/3 w-3/4 p-6 mx-auto flex flex-col gap-5 shadow-2xl rounded-xl absolute top-[20%] md:left-[60%] left-0 right-0 z-10 bg-white bg-opacity-40 animate__animated animate__flipInY'>
-        <h1 className='text-2xl text-Brown-300 font-semibold absolute top-5 left-10'>ثبت نام</h1>
+      <form onSubmit={formik.handleSubmit} className={`md:w-1/3 w-3/4 p-6 mx-auto flex flex-col gap-4 shadow-2xl rounded-xl absolute top-[20%] md:left-[55%] left-0 right-0 z-10 animate__animated animate__flipInY bg-white bg-opacity-40 select-none`}>        {
+           form == 'ثبت نام' ?
+           <h1 className='text-2xl text-Brown-300 font-semibold absolute top-5 left-10'>ثبت نام</h1> :
+           <h1 className='text-2xl text-Brown-300 font-semibold absolute top-5 left-10'>ورود</h1>
+        }
        <label htmlFor="firstName" className='text-primaryColor font-bold'>نام</label>
        <input
          id="firstName"
@@ -56,7 +62,8 @@ export default function RegisterPage() {
          className='p-1 rounded-md'
        />
        {formik.errors.firstName && formik.touched.firstName && <h2 className='text-red-400'>{formik.errors.firstName}</h2>}
-       <label htmlFor="lastName" className='text-primaryColor font-bold'>نام خانوادگی</label>
+       {form == 'ثبت نام' && (<>
+        <label htmlFor="lastName" className='text-primaryColor font-bold'>نام خانوادگی</label>
        <input
          id="lastName"
          name="lastName"
@@ -67,6 +74,7 @@ export default function RegisterPage() {
          className='p-1 rounded-md'
        />
        {formik.errors.lastName && formik.touched.lastName && <h2 className='text-red-400'>{formik.errors.lastName}</h2>}
+       </>)}
        <label htmlFor="email" className='text-primaryColor font-bold'>ایمیل</label>
        <input
          id="email"
@@ -77,6 +85,12 @@ export default function RegisterPage() {
          value={formik.values.email}
          className='p-1 rounded-md'
        />
+       {
+        form == 'ثبت نام' ? 
+        <h2 className='w-fit text-Brown-300 bg-Brown-100 p-1 rounded-lg text-left font-semibold cursor-pointer' onClick={()=>{setForm('ورود');}}>ورود</h2> :
+        
+       <h2 className='w-fit text-Brown-300 bg-Brown-100 p-1 rounded-lg text-left font-semibold cursor-pointer' onClick={()=>setForm('ثبت نام')}>ثبت نام</h2>
+       }
        {formik.errors.email && formik.touched.email && <h2 className='text-red-400'>{formik.errors.email}</h2>}
        <button type="submit" className='w-fit px-10 py-2 mx-auto flex justify-center items-center bg-primaryColor text-bgItemLightColor font-bold rounded-md hover:bg-secondaryColor'>Submit</button>
      </form>
