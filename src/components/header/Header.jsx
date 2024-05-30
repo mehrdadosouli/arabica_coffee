@@ -118,7 +118,7 @@ export default function Header() {
     },
   ];
 
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(localStorage.getItem('themeCoffee') ? localStorage.getItem('themeCoffee') : 'light');
   const [showMenuMobile, setShowMenuMobile] = useState(false);
   const [showCartMobile, setShowCartMobile] = useState(false);
 
