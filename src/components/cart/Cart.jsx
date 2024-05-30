@@ -29,7 +29,7 @@ const Cart = ({ showCartMobile, hamburgerCartBtn }) => {
 
   return (
     <div
-      className={`w-full h-screen lg:h-auto absolute  lg:rounded-2xl lg:overflow-hidden lg:relative top-0 left-0 flex flex-col justify-start items-end gap-6 overflow-hidden duration-300 cursor-default ${
+      className={`w-full h-screen lg:h-auto absolute lg:rounded-2xl lg:overflow-hidden lg:relative top-0 left-0 flex flex-col justify-start items-end gap-6 overflow-hidden duration-300 cursor-default ${
         showCartMobile
           ? "translate-x-0 opacity-100 ease-in"
           : "-translate-x-full opacity-0 ease-in-out"
@@ -40,7 +40,7 @@ const Cart = ({ showCartMobile, hamburgerCartBtn }) => {
         className="w-screen h-screen block lg:hidden absolute top-0 left-0 z-0 bg-[#00000040]"
       ></span>
 
-      <div className="w-2/3 lg:w-full h-full relative px-4 lg:p-10 z-50 bg-bgItemLightColor dark:bg-bgItemDarkColor flex flex-col justify-start items-start gap-4">
+      <div className={`w-2/3 lg:w-full h-full relative px-4 lg:p-10 z-50 bg-bgItemLightColor dark:bg-bgItemDarkColor ${showCartMobile ? 'flex' : 'hidden'} flex-col justify-start items-start gap-4`}>
         <div className="w-full pt-5 pb-1 lg:py-0 flex justify-between items-center">
           {/* close hamburger cart Btn */}
           <svg
