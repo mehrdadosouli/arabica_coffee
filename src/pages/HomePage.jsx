@@ -11,17 +11,6 @@ import headerBgMobile from "../assets/image/headerBgMobile.webp";
 import farmer from "../assets/image/body-bg.png";
 import contact from "../assets/image/contact.png";
 
-//image product
-import p1 from "../assets/image/products/p1.png";
-import p2 from "../assets/image/products/p2.png";
-import p3 from "../assets/image/products/p3.png";
-import p4 from "../assets/image/products/p4.png";
-
-//image product 2
-import p5 from "../assets/image/products/p5.png";
-import p6 from "../assets/image/products/p6.png";
-import p7 from "../assets/image/products/p7.png";
-import p8 from "../assets/image/products/p8.png";
 
 // image category
 import categoryRight from "../assets/image/categories/category-right.jpg";
@@ -49,159 +38,18 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import ItemProduct from "../components/product/item-product/ItemProduct";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { funcAllproducts } from "../redux/features/products/ProductsSlice";
+
 
 // MarkdownPreview lazy load
 
 export default function HomePage() {
-  const products = [
-    {
-      uuid: "1",
-      image: p1,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "2",
-      image: p2,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 5,
-      offer: 12,
-      offer_amount: 154000,
-    },
-    {
-      uuid: "3",
-      image: p3,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: -1,
-      rating: 3,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "4",
-      image: p4,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "5",
-      image: p3,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "6",
-      image: p4,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 5,
-      offer: 12,
-      offer_amount: 154000,
-    },
-    {
-      uuid: "7",
-      image: p1,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: -1,
-      rating: 3,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "8",
-      image: p2,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-  ];
-
-  const products2 = [
-    {
-      uuid: "1",
-      image: p5,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "2",
-      image: p6,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 5,
-      offer: 12,
-      offer_amount: 154000,
-    },
-    {
-      uuid: "3",
-      image: p7,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: -1,
-      rating: 3,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "4",
-      image: p8,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "5",
-      image: p5,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "6",
-      image: p6,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 5,
-      offer: 12,
-      offer_amount: 154000,
-    },
-    {
-      uuid: "7",
-      image: p7,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: -1,
-      rating: 3,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "8",
-      image: p8,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-  ];
+  const select=useSelector(funcAllproducts)
+  const allProducts=[
+    ...select.product1,
+    ...select.product2
+  ]
 
   const blogs = [
     {
@@ -413,7 +261,7 @@ export default function HomePage() {
         />
 
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-5 justify-center items-center">
-          {products.map((item, index) => (
+          {select.product1.map((item, index) => (
             <ItemProduct key={index} product={item} />
           ))}
         </section>
@@ -501,8 +349,8 @@ export default function HomePage() {
           </span>
 
           <div ref={sliderRef} className="keen-slider">
-            {products2?.length !== 0 &&
-              products2?.map((item) => (
+            {select.product2?.length !== 0 &&
+              select.product2?.map((item) => (
                 <Link key={item.uuid} to={`#`}>
                   <section className="keen-slider__slide">
                     <ItemProduct product={item} />
@@ -510,7 +358,7 @@ export default function HomePage() {
                 </Link>
               ))}
 
-            {!products2?.length === 0 && (
+            {!select.product2?.length === 0 && (
               <h2 className="w-full text-slate-800 text-base text-center font-bold capitalize">
                 products is not found!
               </h2>
@@ -662,36 +510,36 @@ export default function HomePage() {
   );
 }
 
-HomePage.propTypes = {
-  categories: PropTypes.shape({
-    uuid: PropTypes.string,
-    category_name: PropTypes.string,
-  }),
+// HomePage.propTypes = {
+//   categories: PropTypes.shape({
+//     uuid: PropTypes.string,
+//     category_name: PropTypes.string,
+//   }),
 
-  products: PropTypes.shape({
-    uuid: PropTypes.string,
-    image: PropTypes.string,
-    product: PropTypes.string,
-    amount: PropTypes.number,
-    rating: PropTypes.number,
-    offer: PropTypes.number,
-    offer_amount: PropTypes.number,
-  }),
+//   products: PropTypes.shape({
+//     uuid: PropTypes.string,
+//     image: PropTypes.string,
+//     product: PropTypes.string,
+//     amount: PropTypes.number,
+//     rating: PropTypes.number,
+//     offer: PropTypes.number,
+//     offer_amount: PropTypes.number,
+//   }),
 
-  products2: PropTypes.shape({
-    uuid: PropTypes.string,
-    image: PropTypes.string,
-    product: PropTypes.string,
-    amount: PropTypes.number,
-    rating: PropTypes.number,
-    offer: PropTypes.number,
-    offer_amount: PropTypes.number,
-  }),
+//   products2: PropTypes.shape({
+//     uuid: PropTypes.string,
+//     image: PropTypes.string,
+//     product: PropTypes.string,
+//     amount: PropTypes.number,
+//     rating: PropTypes.number,
+//     offer: PropTypes.number,
+//     offer_amount: PropTypes.number,
+//   }),
 
-  blogs: PropTypes.shape({
-    uuid: PropTypes.string,
-    image: PropTypes.string,
-    title: PropTypes.string,
-    date: PropTypes.string,
-  }),
-};
+//   blogs: PropTypes.shape({
+//     uuid: PropTypes.string,
+//     image: PropTypes.string,
+//     title: PropTypes.string,
+//     date: PropTypes.string,
+//   }),
+// };
