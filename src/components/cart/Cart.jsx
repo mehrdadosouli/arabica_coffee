@@ -1,39 +1,18 @@
 import PropTypes from "prop-types";
 import ItemCart from "./itemCart/ItemCart";
 
-//image product
-import p1 from "../../assets/image/products/p1.png";
-import p2 from "../../assets/image/products/p2.png";
+import { useSelector } from "react-redux";
+import { basketState } from "../../redux/features/products/ProductsSlice";
 
 const Cart = ({ showCartMobile, hamburgerCartBtn }) => {
-  const products = [
-    {
-      uuid: "1",
-      image: p1,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "2",
-      image: p2,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 5,
-      offer: 10,
-      offer_amount: 154000,
-    },
-  ];
+  const products = useSelector(basketState)
 
   return (
     <div
-      className={`w-full h-screen lg:h-auto absolute lg:rounded-2xl lg:overflow-hidden lg:relative top-0 left-0 flex flex-col justify-start items-end gap-6 overflow-hidden duration-300 cursor-default ${
-        showCartMobile
+      className={`w-full h-screen lg:h-auto absolute lg:rounded-2xl lg:overflow-scroll lg:relative top-0 left-0 flex flex-col justify-start items-end gap-6 overflow-scroll duration-300 cursor-default ${showCartMobile
           ? "translate-x-0 opacity-100 ease-in"
           : "-translate-x-full opacity-0 ease-in-out"
-      } lg:!translate-x-0`}
+        } lg:!translate-x-0`}
     >
       <span
         onClick={() => hamburgerCartBtn()}
@@ -69,9 +48,12 @@ const Cart = ({ showCartMobile, hamburgerCartBtn }) => {
         <hr className="w-full block lg:hidden h-px bg-lineSecondaryColor dark:bg-white-10" />
 
         <div className="w-full overflow-y-auto">
-          {products.map((item, index) => (
-            <ItemCart key={index} product={item} />
-          ))}
+          {products ?
+            products.map((item, index) => (
+              <ItemCart key={index} product={item} />
+            ))
+            :
+            <span className="dark:text-textPrimaryDarkColor">آیتمی موجود نیست</span>}
         </div>
 
         <div className="w-full absolute lg:relative bottom-0 left-0 px-4 pb-5 lg:px-0 bg-bgItemLightColor dark:bg-bgItemDarkColor flex flex-row lg:flex-row-reverse justify-start lg:justify-between items-center gap-4">

@@ -10,6 +10,25 @@ import p6 from "../../../assets/image/products/p6.png";
 import p7 from "../../../assets/image/products/p7.png";
 import p8 from "../../../assets/image/products/p8.png";
 
+// image club
+import activity from "../../../assets/image/club/Activity.svg";
+import discovery from "../../../assets/image/club/Discovery.svg";
+import ticketStar from "../../../assets/image/club/Ticket-Star.svg";
+
+// image blog
+import blogImage1 from "../../../assets/image/blogs/blog-1.png";
+import blogImage2 from "../../../assets/image/blogs/blog-2.png";
+import blogImage3 from "../../../assets/image/blogs/blog-3.png";
+import blogImage4 from "../../../assets/image/blogs/blog-4.png";
+
+// image category
+
+import cat1 from "../../../assets/image/categories/category1.png";
+import cat2 from "../../../assets/image/categories/category2.png";
+import cat3 from "../../../assets/image/categories/category3.png";
+import cat4 from "../../../assets/image/categories/category4.png";
+import cat5 from "../../../assets/image/categories/category5.png";
+
 const initialState={
     allProducts:{
       product1:[
@@ -88,7 +107,7 @@ const initialState={
       ],
       product2:[
         {
-          uuid: "1",
+          uuid: "9",
           image: p5,
           product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
           amount: 175000,
@@ -97,7 +116,7 @@ const initialState={
           offer_amount: 0,
         },
         {
-          uuid: "2",
+          uuid: "10",
           image: p6,
           product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
           amount: 175000,
@@ -106,7 +125,7 @@ const initialState={
           offer_amount: 154000,
         },
         {
-          uuid: "3",
+          uuid: "11",
           image: p7,
           product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
           amount: -1,
@@ -115,7 +134,7 @@ const initialState={
           offer_amount: 0,
         },
         {
-          uuid: "4",
+          uuid: "12",
           image: p8,
           product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
           amount: 175000,
@@ -124,7 +143,7 @@ const initialState={
           offer_amount: 0,
         },
         {
-          uuid: "5",
+          uuid: "13",
           image: p5,
           product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
           amount: 175000,
@@ -133,7 +152,7 @@ const initialState={
           offer_amount: 0,
         },
         {
-          uuid: "6",
+          uuid: "14",
           image: p6,
           product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
           amount: 175000,
@@ -142,7 +161,7 @@ const initialState={
           offer_amount: 154000,
         },
         {
-          uuid: "7",
+          uuid: "15",
           image: p7,
           product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
           amount: -1,
@@ -151,7 +170,7 @@ const initialState={
           offer_amount: 0,
         },
         {
-          uuid: "8",
+          uuid: "16",
           image: p8,
           product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
           amount: 175000,
@@ -160,7 +179,46 @@ const initialState={
           offer_amount: 0,
         },
       ]
-    }
+    },
+    basket:[],
+    club : [
+      { icon: activity, itemClub: "ماموریت ها" },
+      { icon: discovery, itemClub: "چرخ و بخت" },
+      { icon: ticketStar, itemClub: "جایزه ها" },
+    ],
+    blogs :[
+      {
+        uuid: "1",
+        image: blogImage1,
+        title: "طرز تهیه قهوه دمی با دستگاه اروپرس",
+        date: "1402/5/21",
+      },
+      {
+        uuid: "2",
+        image: blogImage2,
+        title: "یک نوشیدنی هیجان انگیز و پرکالری برای شروع روز",
+        date: "1402/5/21",
+      },
+      {
+        uuid: "3",
+        image: blogImage3,
+        title: "طرز تهیه یک فنجان کافه زینو برزیلی",
+        date: "1402/5/21",
+      },
+      {
+        uuid: "4",
+        image: blogImage4,
+        title: "طرز تهیه قهوه دالگونا مناسب روز‌های کرونایی",
+        date: "1402/5/21",
+      },
+    ],
+    categories :[
+      { uuid: "1", image: cat1, category_name: "قهوه دمی و اسپرسو" },
+      { uuid: "2", image: cat2, category_name: "لوازم جانبی و تجهیزات" },
+      { uuid: "3", image: cat3, category_name: "اسپرسو ساز" },
+      { uuid: "4", image: cat4, category_name: "پک تستر قهوه" },
+      { uuid: "5", image: cat5, category_name: "قهوه ترک" },
+    ],
     
 }
 
@@ -168,8 +226,15 @@ export const ProductsSlice=createSlice({
     name:'products',
     initialState,
     reducers:{
-            
+        addToCard:(state,action)=>{
+          state.basket.push(action.payload)
+        }
     }
 })
 export default ProductsSlice.reducer
+export const {addToCard} = ProductsSlice.actions
 export const funcAllproducts = (store)=> store.products.allProducts
+export const funcAllclub = (store)=> store.products.club
+export const funcAllBlogs = (store)=> store.products.blogs
+export const funcAllCategories = (store)=> store.products.categories
+export const basketState=(store)=>store.products.basket

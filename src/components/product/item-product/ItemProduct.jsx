@@ -1,18 +1,22 @@
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { addToCard } from "../../../redux/features/products/ProductsSlice";
 
 const ItemProduct = ({ product }) => {
+  const dispatch=useDispatch()
   const toTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
+
+  const addToCardHandler = () => {
+    dispatch(addToCard(product));
+  }
   return (
-    <Link
-      id="RouterNavLink"
-      to={`/product/${product.uuid}`}
-      onClick={() => toTop()}
+    <div
       className="w-full lg:min-h-[450px] p-2 lg:p-5 relative bg-bgItemLightColor dark:bg-bgItemDarkColor flex flex-col justify-between items-center lg:items-stretch gap-2 lg:gap-5 rounded-2xl shadow-defaultShadow overflow-hidden"
     >
       {product.offer != 0 && (
@@ -20,23 +24,33 @@ const ItemProduct = ({ product }) => {
           <p>{product.offer}%</p>
         </span>
       )}
-
-      <img
-        src={product.image}
-        alt={product.image}
-        className="size-32 lg:size-64 object-contain"
-      />
-
+      <Link
+        id="RouterNavLink"
+        to={`/product/${product.uuid}`}
+        onClick={() => toTop()}
+      >
+        <img
+          src={product.image}
+          alt={product.image}
+          className="size-32 lg:size-64 object-contain"
+        />
+      </Link>
       <div className="w-full flex flex-col justify-start items-start gap-3">
         {/* name */}
-        <h5 className="w-full text-right font-medium text-sm lg:text-xl text-textPrimaryLightColor dark:text-textPrimaryDarkColor">
-          {window.innerWidth <= 425
-            ? // eslint-disable-next-line react/prop-types
+        <Link
+          id="RouterNavLink"
+          to={`/product/${product.uuid}`}
+          onClick={() => toTop()}
+        >
+          <h5 className="w-full text-right font-medium text-sm lg:text-xl text-textPrimaryLightColor dark:text-textPrimaryDarkColor">
+            {window.innerWidth <= 425
+              ? // eslint-disable-next-line react/prop-types
               product?.product.length >= 34 &&
               // eslint-disable-next-line react/prop-types
               `${product?.product.slice(0, 34)}...`
-            : product?.product}
-        </h5>
+              : product?.product}
+          </h5>
+        </Link>
         {/* amount  */}
         <div className="w-full flex flex-row justify-start items-center gap-2">
           {/* print original amount or offer amount product */}
@@ -78,7 +92,7 @@ const ItemProduct = ({ product }) => {
         <div className="w-full flex flex-row justify-between items-center">
           <div className="flex flex-row justify-start items-center gap-2.5 lg:gap-3">
             {/* add to cart button */}
-            <span className="size-7 lg:size-9 bg-gray-100 hover:bg-[#0D9488] dark:bg-[#27272A] dark:hover:bg-successPrimaryColor text-iconSecondaryColor hover:text-[#fff] rounded-full flex justify-center items-center duration-300">
+            <button className={`size-7 lg:size-9 bg-gray-100 ${product.amount == -1 ? "cursor-default" : "hover:bg-[#0D9488] cursor-pointer"} dark:bg-[#27272A] dark:hover:bg-successPrimaryColor text-iconSecondaryColor hover:text-[#fff] rounded-full flex justify-center items-center duration-300 `} disabled = {product.amount != -1 ? "true" : "false"} >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -86,6 +100,7 @@ const ItemProduct = ({ product }) => {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="size-4 lg:size-6"
+                onClick={addToCardHandler}
               >
                 <path
                   strokeLinecap="round"
@@ -93,7 +108,7 @@ const ItemProduct = ({ product }) => {
                   d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
                 />
               </svg>
-            </span>
+            </button>
 
             {/* comparison button */}
             <span className="text-iconSecondaryColor hover:text-[#0D9488] dark:hover:text-successPrimaryColor duration-300">
@@ -156,7 +171,7 @@ const ItemProduct = ({ product }) => {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

@@ -389,7 +389,7 @@ export default function Header() {
           ></span>
       </div>
         
-      <div className="lg:pt-4 lg:absolute left-0">
+      {/* <div className="lg:pt-4 lg:absolute left-0">
           <ul
             className={
               showCartMobile
@@ -402,16 +402,14 @@ export default function Header() {
               hamburgerCartBtn={hamburgerCartBtn}
             />
           </ul>
-      </div>
+      </div> */}
 
-      {window.innerWidth > 430 && (
           <div className="lg:pt-4 lg:absolute lg:left-0 lg:top-[90%] ">
             <Cart
               showCartMobile={showCartMobile}
               hamburgerCartBtn={hamburgerCartBtn}
             />
         </div>
-      )}
     </div>
       
     </header>

@@ -1,20 +1,6 @@
-//image product
-import p1 from "../../assets/image/products/p1.png";
-import p2 from "../../assets/image/products/p2.png";
-import p3 from "../../assets/image/products/p3.png";
-import p4 from "../../assets/image/products/p4.png";
-
-//image product 2
-import p5 from "../../assets/image/products/p5.png";
-import p6 from "../../assets/image/products/p6.png";
-import p7 from "../../assets/image/products/p7.png";
-import p8 from "../../assets/image/products/p8.png";
-
 // image club
 import diamond from "../../assets/image/club/diamond.png";
-import activity from "../../assets/image/club/Activity.svg";
-import discovery from "../../assets/image/club/Discovery.svg";
-import ticketStar from "../../assets/image/club/Ticket-Star.svg";
+
 import { Link, useParams } from "react-router-dom";
 import ItemProduct from "./item-product/ItemProduct";
 import { useKeenSlider } from "keen-slider/react";
@@ -27,11 +13,20 @@ import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "yet-another-react-lightbox/styles.css";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { funcAllclub, funcAllproducts } from "../../redux/features/products/ProductsSlice";
 
 const Product = () => {
+  const select=useSelector(funcAllproducts)
+  const club=useSelector(funcAllclub)
+  const allProducts=[
+    ...select.product1,
+    ...select.product2
+  ]
   // const [open, setOpen] = useState(false);
   const params = useParams(); // get param from nav address
   const productId = params.id;
+  const product=allProducts.find(item=>item.uuid == productId)
   console.log("🚀 ~ Product ~ productId:", productId);
   // const [searchParams] = useSearchParams();
   // const navigate = useNavigate();
@@ -40,106 +35,17 @@ const Product = () => {
     document.title = "کافه عربیکا - محصول قهوه";
   }, []);
 
-  const product = {
-    uuid: "1",
-    image: p1,
-    product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-    description:
-      "اتیوپی یکی از کشورهایی است که محصولات آن را همه قهوه نوشان می شناسند و اگر یک قهوه خور حرفه ای باشید عطر و طعم های گلی و میوه ای آن شما را سرحال کرده و بدون اتکا به کافئین از خوردن یک نوشیدنی جذاب لذت خواهید برد طعم یادهای بری جات از خصوصیات بارز این قهوه است",
-    amount: 175000,
-    rating: 4,
-    offer: 12,
-    offer_amount: 157000,
-  };
-
-  const imageProduct = [
-    { image: p1 },
-    { image: p2 },
-    { image: p4 },
-    { image: p3 },
-    { image: p6 },
-  ];
-
-  const products2 = [
-    {
-      uuid: "1",
-      image: p5,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "2",
-      image: p6,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 5,
-      offer: 12,
-      offer_amount: 154000,
-    },
-    {
-      uuid: "3",
-      image: p7,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: -1,
-      rating: 3,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "4",
-      image: p8,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "5",
-      image: p5,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "6",
-      image: p6,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 5,
-      offer: 12,
-      offer_amount: 154000,
-    },
-    {
-      uuid: "7",
-      image: p7,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: -1,
-      rating: 3,
-      offer: 0,
-      offer_amount: 0,
-    },
-    {
-      uuid: "8",
-      image: p8,
-      product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
-      amount: 175000,
-      rating: 4,
-      offer: 0,
-      offer_amount: 0,
-    },
-  ];
-
-  const club = [
-    { icon: activity, itemClub: "ماموریت ها" },
-    { icon: discovery, itemClub: "چرخ و بخت" },
-    { icon: ticketStar, itemClub: "جایزه ها" },
-  ];
+  // const product = {
+  //   uuid: "1",
+  //   image: p1,
+  //   product: "قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی",
+  //   description:
+  //     "اتیوپی یکی از کشورهایی است که محصولات آن را همه قهوه نوشان می شناسند و اگر یک قهوه خور حرفه ای باشید عطر و طعم های گلی و میوه ای آن شما را سرحال کرده و بدون اتکا به کافئین از خوردن یک نوشیدنی جذاب لذت خواهید برد طعم یادهای بری جات از خصوصیات بارز این قهوه است",
+  //   amount: 175000,
+  //   rating: 4,
+  //   offer: 12,
+  //   offer_amount: 157000,
+  // };
 
   // keen slider near products
   const [sliderRef] = useKeenSlider({
@@ -240,8 +146,8 @@ const Product = () => {
             </span>
 
             <div ref={sliderRefImageProduct} className="keen-slider">
-              {imageProduct?.length !== 0 &&
-                imageProduct?.map((item) => (
+              {allProducts?.length !== 0 &&
+                allProducts?.map((item) => (
                   <Link key={item.image} to={`#`}>
                     <section className="keen-slider__slide">
                       <img
@@ -253,7 +159,7 @@ const Product = () => {
                   </Link>
                 ))}
 
-              {!imageProduct?.length === 0 && (
+              {!allProducts?.length === 0 && (
                 <h2 className="w-full text-slate-800 text-base text-center font-bold capitalize">
                   products is not found!
                 </h2>
@@ -452,8 +358,8 @@ const Product = () => {
         </span> */}
 
         <div ref={sliderRef} className="keen-slider">
-          {products2?.length !== 0 &&
-            products2?.map((item) => (
+          {allProducts?.length !== 0 &&
+            allProducts?.map((item) => (
               <Link key={item.uuid} to={`#`}>
                 <section className="keen-slider__slide">
                   <ItemProduct product={item} />
@@ -461,7 +367,7 @@ const Product = () => {
               </Link>
             ))}
 
-          {!products2?.length === 0 && (
+          {!allProducts?.length === 0 && (
             <h2 className="w-full text-slate-800 text-base text-center font-bold capitalize">
               products is not found!
             </h2>

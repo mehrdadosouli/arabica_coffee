@@ -15,23 +15,13 @@ import contact from "../assets/image/contact.png";
 // image category
 import categoryRight from "../assets/image/categories/category-right.jpg";
 import categoryLeft from "../assets/image/categories/category-left.jpg";
-import cat1 from "../assets/image/categories/category1.png";
-import cat2 from "../assets/image/categories/category2.png";
-import cat3 from "../assets/image/categories/category3.png";
-import cat4 from "../assets/image/categories/category4.png";
-import cat5 from "../assets/image/categories/category5.png";
 
-// image blog
-import blogImage1 from "../assets/image/blogs/blog-1.png";
-import blogImage2 from "../assets/image/blogs/blog-2.png";
-import blogImage3 from "../assets/image/blogs/blog-3.png";
-import blogImage4 from "../assets/image/blogs/blog-4.png";
+
+
 
 // image club
 import diamond from "../assets/image/club/diamond.png";
-import activity from "../assets/image/club/Activity.svg";
-import discovery from "../assets/image/club/Discovery.svg";
-import ticketStar from "../assets/image/club/Ticket-Star.svg";
+
 
 // keen slider
 import { useKeenSlider } from "keen-slider/react";
@@ -39,58 +29,20 @@ import "keen-slider/keen-slider.min.css";
 import ItemProduct from "../components/product/item-product/ItemProduct";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { funcAllproducts } from "../redux/features/products/ProductsSlice";
+import { funcAllBlogs, funcAllCategories, funcAllclub, funcAllproducts } from "../redux/features/products/ProductsSlice";
 
 
 // MarkdownPreview lazy load
 
 export default function HomePage() {
   const select=useSelector(funcAllproducts)
+  const blogs=useSelector(funcAllBlogs)
+  const club=useSelector(funcAllclub)
+  const categories=useSelector(funcAllCategories)
   const allProducts=[
     ...select.product1,
     ...select.product2
   ]
-
-  const blogs = [
-    {
-      uuid: "1",
-      image: blogImage1,
-      title: "طرز تهیه قهوه دمی با دستگاه اروپرس",
-      date: "1402/5/21",
-    },
-    {
-      uuid: "2",
-      image: blogImage2,
-      title: "یک نوشیدنی هیجان انگیز و پرکالری برای شروع روز",
-      date: "1402/5/21",
-    },
-    {
-      uuid: "3",
-      image: blogImage3,
-      title: "طرز تهیه یک فنجان کافه زینو برزیلی",
-      date: "1402/5/21",
-    },
-    {
-      uuid: "4",
-      image: blogImage4,
-      title: "طرز تهیه قهوه دالگونا مناسب روز‌های کرونایی",
-      date: "1402/5/21",
-    },
-  ];
-
-  const categories = [
-    { uuid: "1", image: cat1, category_name: "قهوه دمی و اسپرسو" },
-    { uuid: "2", image: cat2, category_name: "لوازم جانبی و تجهیزات" },
-    { uuid: "3", image: cat3, category_name: "اسپرسو ساز" },
-    { uuid: "4", image: cat4, category_name: "پک تستر قهوه" },
-    { uuid: "5", image: cat5, category_name: "قهوه ترک" },
-  ];
-
-  const club = [
-    { icon: activity, itemClub: "ماموریت ها" },
-    { icon: discovery, itemClub: "چرخ و بخت" },
-    { icon: ticketStar, itemClub: "جایزه ها" },
-  ];
 
   // keen slider
   const animation = { duration: 80000, easing: (t) => t };
@@ -139,7 +91,7 @@ export default function HomePage() {
 
   useEffect(() => {
     document.title = "کافه عربیکا - صفحه اصلی";
-  }, []);
+  }, []); 
 
   return (
     <main className="w-full pt-16 lg:p-0 flex flex-col justify-center items-center">
@@ -257,7 +209,7 @@ export default function HomePage() {
           title={`جدیدترین محصولات`}
           subTitle={`فرآوری شده از دانه قهوه`}
           textLink={`مشاهده همه محصولات`}
-          toLink={`#`}
+          toLink='/shopping'
         />
 
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-5 justify-center items-center">
@@ -351,11 +303,9 @@ export default function HomePage() {
           <div ref={sliderRef} className="keen-slider">
             {select.product2?.length !== 0 &&
               select.product2?.map((item) => (
-                <Link key={item.uuid} to={`#`}>
                   <section className="keen-slider__slide">
                     <ItemProduct product={item} />
                   </section>
-                </Link>
               ))}
 
             {!select.product2?.length === 0 && (

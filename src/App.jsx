@@ -35,7 +35,7 @@ function App() {
       {/* toast  show*/}
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Suspense fallback={<Loading />}><HomePage /></Suspense>} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/shopping" element={<Suspense fallback={<Loading />}><Shopping /></Suspense>} />
         <Route path="/cart" element={<Suspense fallback={<Loading />}><CartPage /></Suspense>} />
         <Route path="/login" element={<LoginPage />} />

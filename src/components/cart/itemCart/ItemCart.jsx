@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 
 const ItemCart = ({ product }) => {
+  console.log(product);
   return (
     <>
       <div className="w-full p-2 lg:px-0 lg:py-5 flex flex-row justify-start items-center gap-2">
@@ -30,7 +31,7 @@ const ItemCart = ({ product }) => {
 
           {/* amount  */}
           <div className="text-right font-bold text-base lg:text-xl text-textPrimaryLightColor dark:text-textPrimaryDarkColor">
-            {product.amount.toLocaleString()}{" "}
+            {product?.offer_amount ?product.offer_amount.toLocaleString() : product.amount.toLocaleString() }{" "}
             <span className="text-right text-xs font-normal">تومان</span>
           </div>
         </div>
