@@ -13,12 +13,16 @@ import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "yet-another-react-lightbox/styles.css";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { funcAllclub, funcAllproducts } from "../../redux/features/products/ProductsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCard, funcAllclub, funcAllproducts } from "../../redux/features/products/ProductsSlice";
 
 const Product = () => {
   const select=useSelector(funcAllproducts)
   const club=useSelector(funcAllclub)
+  const dispatch = useDispatch();
+  const increaseHandler = () => {
+    dispatch(addToCard(product));
+  };
   const allProducts=[
     ...select.product1,
     ...select.product2
@@ -311,7 +315,7 @@ const Product = () => {
             </div>
           </div>
 
-          <button className="w-full h-12 font-normal text-base lg:text-lg text-textPrimaryDarkColor bg-successPrimaryColor hover:bg-successSecondaryColor rounded-xl duration-300 flex flex-row justify-center items-center gap-2 lg:gap-4">
+          <button className="w-full h-12 font-normal text-base lg:text-lg text-textPrimaryDarkColor bg-successPrimaryColor hover:bg-successSecondaryColor rounded-xl duration-300 flex flex-row justify-center items-center gap-2 lg:gap-4" onClick={increaseHandler}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

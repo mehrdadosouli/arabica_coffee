@@ -88,6 +88,9 @@ const ItemCart = ({ product }) => {
                   </svg>
                 </button>
               )}
+              {
+                product.count
+              }
               {product?.count && (
                 <button onClick={increaseHandler} className="btnCard">
                   <svg

@@ -44,10 +44,8 @@ function App() {
         <Route path="/blog" element={<Suspense fallback={<Loading />}><Blogs /></Suspense>} />
         <Route path="/blog/:id" element={<Suspense fallback={<Loading />}><Blog /></Suspense>} />
         <Route path="/contact-us" element={<Suspense fallback={<Loading />}><ContactUs /></Suspense>} />
-
         {/* see single product */}
         <Route path="/product/:id" element={<Product />} />
-
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
