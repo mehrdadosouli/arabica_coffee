@@ -52,16 +52,16 @@ const ItemCart = ({ product }) => {
                 : product.amount.toLocaleString()}{" "}
               <span className="text-right text-xs font-normal">تومان</span>
             </div>
-            <div>
+            <div className="flex">
               {product?.count < 2 ? (
-                <button onClick={removeHandler}>
+                <button onClick={removeHandler} className="btnCard">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="size-6"
+                    className="md:size-6 size-4"
                   >
                     <path
                       strokeLinecap="round"
@@ -71,14 +71,14 @@ const ItemCart = ({ product }) => {
                   </svg>
                 </button>
               ) : (
-                <button onClick={decreaseHandler}>
+                <button onClick={decreaseHandler} className="btnCard">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="size-6"
+                    className="md:size-6 size-4"
                   >
                     <path
                       strokeLinecap="round"
@@ -89,14 +89,14 @@ const ItemCart = ({ product }) => {
                 </button>
               )}
               {product?.count && (
-                <button onClick={increaseHandler}>
+                <button onClick={increaseHandler} className="btnCard">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="size-6"
+                    className="md:size-6 size-4"
                   >
                     <path
                       strokeLinecap="round"

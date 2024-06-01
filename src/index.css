@@ -50,3 +50,14 @@
     --animation-duration: 5s;
   }
 }
+
+@layer components{
+  .btnCard{
+    @apply mx-1 md:p-2 p-1 bg-gray-100 dark:bg-bgDarkColor rounded-full hover:dark:bg-successPrimaryColor hover:bg-successPrimaryColor hover:text-textPrimaryDarkColor text-iconSecondaryColor transition-all
+  }
+  
+}
+.lastchild:last-child{
+  color: red;
+  padding: 20rem;
+}

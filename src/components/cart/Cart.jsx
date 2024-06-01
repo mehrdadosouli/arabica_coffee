@@ -11,7 +11,7 @@ const Cart = ({ showCartMobile, hamburgerCartBtn }) => {
 
   return (
     <div
-      className={`w-full max-h-[70vh] absolute lg:rounded-2xl lg:relative top-0 left-0 flex flex-col justify-start items-end gap-6 duration-300 overflow-y-scroll cursor-default ${showCartMobile
+      className={`w-full md:max-h-[70vh] md:h-auto h-screen absolute lg:rounded-2xl lg:relative top-0 left-0 flex flex-col justify-start items-end gap-6 duration-300 overflow-y-scroll scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100 shadow-xl cursor-default ${showCartMobile
           ? "translate-x-0 opacity-100 ease-in"
           : "-translate-x-full opacity-0 ease-in-out"
         } lg:!translate-x-0`}
@@ -59,7 +59,7 @@ const Cart = ({ showCartMobile, hamburgerCartBtn }) => {
             }
         </div>
 
-        <div className="w-full absolute lg:relative bottom-0 left-0 px-4 pb-5 lg:px-0 bg-bgItemLightColor dark:bg-bgItemDarkColor flex flex-row lg:flex-row-reverse justify-start lg:justify-between items-center gap-4">
+        <div className="w-full bottom-0 left-0 px-4 pb-5 lg:px-0 bg-bgItemLightColor dark:bg-bgItemDarkColor flex flex-row lg:flex-row-reverse justify-start lg:justify-between items-center gap-4">
           <Link to='/checkout' className="w-28 h-11 flex justify-center items-center font-normal text-base lg:text-lg text-textPrimaryDarkColor bg-[#0D9488] rounded-xl duration-300">
             ثبت سفارش
           </Link>
