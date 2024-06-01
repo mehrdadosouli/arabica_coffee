@@ -40,6 +40,7 @@ const initialState={
           rating: 4,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
         {
           uuid: "2",
@@ -49,6 +50,7 @@ const initialState={
           rating: 5,
           offer: 12,
           offer_amount: 154000,
+          count:0
         },
         {
           uuid: "3",
@@ -58,6 +60,7 @@ const initialState={
           rating: 3,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
         {
           uuid: "4",
@@ -67,6 +70,7 @@ const initialState={
           rating: 4,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
         {
           uuid: "5",
@@ -76,6 +80,7 @@ const initialState={
           rating: 4,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
         {
           uuid: "6",
@@ -85,6 +90,7 @@ const initialState={
           rating: 5,
           offer: 12,
           offer_amount: 154000,
+          count:0
         },
         {
           uuid: "7",
@@ -94,6 +100,7 @@ const initialState={
           rating: 3,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
         {
           uuid: "8",
@@ -103,6 +110,7 @@ const initialState={
           rating: 4,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
       ],
       product2:[
@@ -114,6 +122,7 @@ const initialState={
           rating: 4,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
         {
           uuid: "10",
@@ -123,6 +132,7 @@ const initialState={
           rating: 5,
           offer: 12,
           offer_amount: 154000,
+          count:0
         },
         {
           uuid: "11",
@@ -132,6 +142,7 @@ const initialState={
           rating: 3,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
         {
           uuid: "12",
@@ -141,6 +152,7 @@ const initialState={
           rating: 4,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
         {
           uuid: "13",
@@ -150,6 +162,7 @@ const initialState={
           rating: 4,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
         {
           uuid: "14",
@@ -159,6 +172,7 @@ const initialState={
           rating: 5,
           offer: 12,
           offer_amount: 154000,
+          count:0
         },
         {
           uuid: "15",
@@ -168,6 +182,7 @@ const initialState={
           rating: 3,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
         {
           uuid: "16",
@@ -177,10 +192,12 @@ const initialState={
           rating: 4,
           offer: 0,
           offer_amount: 0,
+          count:0
         },
       ]
     },
     basket:[],
+    checkout:0,
     club : [
       { icon: activity, itemClub: "ماموریت ها" },
       { icon: discovery, itemClub: "چرخ و بخت" },
@@ -227,14 +244,40 @@ export const ProductsSlice=createSlice({
     initialState,
     reducers:{
         addToCard:(state,action)=>{
-          state.basket.push(action.payload)
+          const productToAdd = { ...action.payload };
+          state.checkout += action.payload.offer_amount ? action.payload.offer_amount : action.payload.amount
+          const findIndexItem=state.basket.findIndex(elem=>elem.uuid == productToAdd.uuid)
+          if(findIndexItem != -1){
+            state.basket[findIndexItem].count += 1
+          }else{
+            productToAdd.count = 1
+            state.basket.push(productToAdd)
+          }
+        },
+        decrease:(state,action)=>{
+          const productToAdd = { ...action.payload };
+          const findIndexItem=state.basket.findIndex(elem=>elem.uuid == productToAdd.uuid)
+          state.checkout -= action.payload.offer_amount ? action.payload.offer_amount : action.payload.amount
+          if(findIndexItem != -1){
+            state.basket[findIndexItem].count -= 1
+          }
+        },
+        removed:(state,action)=>{
+          const productToAdd = { ...action.payload };
+          const findIndexItem=state.basket.findIndex(elem=>elem.uuid == productToAdd.uuid)
+          if(findIndexItem != -1){
+           const resultFilter= state.basket.filter(i=>i.uuid !== productToAdd.uuid)
+           state.basket=resultFilter
+          state.checkout -= productToAdd.offer_amount? productToAdd.offer_amount : productToAdd.amount 
+          }
         }
     }
 })
 export default ProductsSlice.reducer
-export const {addToCard} = ProductsSlice.actions
+export const {addToCard , decrease ,removed} = ProductsSlice.actions
 export const funcAllproducts = (store)=> store.products.allProducts
 export const funcAllclub = (store)=> store.products.club
 export const funcAllBlogs = (store)=> store.products.blogs
 export const funcAllCategories = (store)=> store.products.categories
 export const basketState=(store)=>store.products.basket
+export const funcCheckout=(store)=>store.products.checkout

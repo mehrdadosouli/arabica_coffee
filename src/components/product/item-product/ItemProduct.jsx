@@ -92,7 +92,7 @@ const ItemProduct = ({ product }) => {
         <div className="w-full flex flex-row justify-between items-center">
           <div className="flex flex-row justify-start items-center gap-2.5 lg:gap-3">
             {/* add to cart button */}
-            <button className={`size-7 lg:size-9 bg-gray-100 ${product.amount == -1 ? "cursor-default" : "hover:bg-[#0D9488] cursor-pointer"} dark:bg-[#27272A] dark:hover:bg-successPrimaryColor text-iconSecondaryColor hover:text-[#fff] rounded-full flex justify-center items-center duration-300 `} disabled = {product.amount != -1 ? "true" : "false"} >
+            <button className={`size-7 lg:size-9 bg-gray-100 ${product.amount == -1 ? "cursor-default" : "hover:bg-[#0D9488] cursor-pointer"} dark:bg-[#27272A] dark:hover:bg-successPrimaryColor text-iconSecondaryColor hover:text-[#fff] rounded-full flex justify-center items-center duration-300 `} disabled={product.amount == -1} >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -131,8 +131,8 @@ const ItemProduct = ({ product }) => {
 
           {/* rating star product */}
           <div className="flex flex-row justify-start items-center">
-            {[...Array(Number(5) - product.rating)].map((star, index) => (
-              <span key={index}>
+            {
+             Array(5 - product.rating).fill(0).map((i,index)=>(<span key={index}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -147,8 +147,8 @@ const ItemProduct = ({ product }) => {
                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
                   />
                 </svg>
-              </span>
-            ))}
+              </span>))
+            }
 
             {[...Array(product.rating)].map((star, index) => (
               <span key={index}>
@@ -167,7 +167,7 @@ const ItemProduct = ({ product }) => {
                   />
                 </svg>
               </span>
-            ))}
+            ))} 
           </div>
         </div>
       </div>
